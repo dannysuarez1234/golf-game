@@ -6,7 +6,8 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "build": "nest build",
+    "build": "pnpm build:prisma && nest build",
+    "build:prisma": "rimraf ./prisma/schema.prisma && prisma-import --schemas=./prisma/**/*.prisma --output=./prisma/schema.prisma && prisma generate",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
@@ -20,10 +21,19 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@apollo/server": "^4.10.4",
+    "@nestjs/apollo": "^12.1.0",
     "@nestjs/common": "^10.0.0",
     "@nestjs/core": "^10.0.0",
+    "@nestjs/graphql": "^12.1.1",
     "@nestjs/platform-express": "^10.0.0",
+    "@prisma/client": "^5.14.0",
+    "graphql": "^16.8.1",
+    "nestjs-prisma": "^0.23.0",
+    "prisma": "^5.14.0",
+    "prisma-import": "^1.0.5",
     "reflect-metadata": "^0.2.0",
+    "rimraf": "^5.0.7",
     "rxjs": "^7.8.1"
   },
   "devDependencies": {
